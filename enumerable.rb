@@ -50,7 +50,7 @@ module Enumerable
 #   my_map
   def my_map
     output = []
-    self.my_each {|x| self.class == Array ? output.push(yield(x)) : output.push(yield(self.keys[self.keys.index x], x.values.index x))}
+    self.my_each {|x| self.class == Array ? output.push(yield(x)) : output.push(yield(self.keys[self.keys.index(x)], self.values.index(x)))}
     output
   end
 end
