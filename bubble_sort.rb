@@ -3,7 +3,7 @@ class Array
   def bubble_sort
     sorted = []
     1.upto(self.size) do
-      last_el = self.reduce { |x, y| x > y ? x : y }
+      last_el = self.reduce { |x, y| x > y ? x : y } : 
       break if last_el.nil?
 
       sorted.unshift(last_el)
