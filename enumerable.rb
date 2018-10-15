@@ -50,7 +50,7 @@ module Enumerable
 #   my_map
   def my_map
     output = []
-    self.my_each {|x| self.class == Array ? output.push(yield(x)) : output.push(yield(self.keys[self.keys.index(x)], self.values.index(x)))}
+    self.my_each {|x,y| self.class == Array ? output.push(yield(x)) : output.push(yield(x,y))}
     output
   end
 end
@@ -78,4 +78,4 @@ b = [5,4,7,9,8,6]
 # puts ary.my_count{ |x| x % 2 ==0 }
 
 puts a.my_map {|k,v| "#{v} Dipto and Ryan!"}
-p b.my_map {|n| n*2}
+# p b.my_map {|n| n*2}
