@@ -1,3 +1,21 @@
+=begin
+ NOTE: 
+ [Bubble Sort Algorithm]
+ ==========================
+ begin BubbleSort(list)
+
+   for all elements of list
+      if list[i] > list[i+1]
+         swap(list[i], list[i+1])
+      end if
+   end for
+   
+   return list
+   
+end BubbleSort
+============================
+=end
+
 def bubble_sort(numbers)
   i,j,len = 0, 0, numbers.length
   while i<len do
