@@ -57,11 +57,9 @@ module Enumerable
   #my_inject
   def my_inject(arg = nil)
     arr = self.class == Array ? self.slice(0..-1) : self.class == Range ? self.to_a : self.my_map {|k, v| {k => v} }
-
     acc = arg == nil ? arr[0] : arg
     nxt = arg == nil ? arr[1] : arr[0]
     start = arg == nil ? 1 : 0
-
     for i in start...arr.size
       res = yield(acc,nxt,i,arr)
       acc = res
@@ -100,14 +98,25 @@ b = [5,4,7,9,8,6]
 
 # p (5..10).my_inject { |sum, n| sum + n }
 
-longest = %w{ cat sheep bear }.my_inject do |memo, word|
-  memo.length > word.length ? memo : word
-end
+# longest = %w{ cat sheep bear }.my_inject do |memo, word|
+#   memo.length > word.length ? memo : word
+# end
 
-# p longest
+# # p longest
 
-def multiply_els(arr)
-  return arr.my_inject {|x,y| x*y}
-end
+# def multiply_els(arr)
+#   return arr.my_inject {|x,y| x*y}
+# end
 
-p multiply_els([2,4,5])
+# p multiply_els([2,4,5])
+
+product = Proc.new {|n| n * 2}
+sum = Proc.new {|n| n + 2}
+power = Proc.new{|x| x**2}
+
+ 
+test = [1,2,3,4,5,6]
+
+p test.my_map(&product).my_map {|i| i**2}
+p test.my_map(&sum)
+p test.my_map(&power)
