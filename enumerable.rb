@@ -43,9 +43,15 @@ module Enumerable
   #my_count
   def my_count(arg = nil)
     count = 0
-    return self.size if arg.nil? && !block_given?
+    return self.size if arg.nil? block_given?
     block_given? && arg.nil? ? self.my_each {|el| count += 1 if yield(el)} : self.my_each {|x| count += 1 if x == arg }
     count
+  end
+#   my_map
+  def my_map
+    output = []
+    self.my_each {|x| self.class == Array ? output.push(yield(x)) : output.push(yield(self.keys[self.keys.index x], x.values.index x))}
+    output
   end
 end
 
@@ -67,6 +73,9 @@ b = [5,4,7,9,8,6]
 # puts a.my_none? {|k,v| k == :banana}
 # puts b.my_none? {|v,i| v < 0}
 
-ary = [1, 2, 4, 2]
+# ary = [1, 2, 4, 2]
 # puts ary.my_count(2)
-puts ary.my_count{ |x| x % 2 ==0 }
+# puts ary.my_count{ |x| x % 2 ==0 }
+
+puts a.my_map {|k,v| "#{v} Dipto and Ryan!"}
+p b.my_map {|n| n*2}
