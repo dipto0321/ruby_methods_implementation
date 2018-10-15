@@ -1,12 +1,12 @@
 module Enumerable
-# my_each
+  #my_each
   def my_each
     for i in 0...self.size
       self.class == Hash ? yield(self.keys[i], self.values[i],i) : yield(self[i],i)
     end
   end
 
-#   my_select
+  #my_select
   def my_select
     output = self.class == Array ? [] : {}
     for i in 0...self.size
@@ -47,10 +47,16 @@ module Enumerable
     block_given? && arg.nil? ? self.my_each {|el| count += 1 if yield(el)} : self.my_each {|x| count += 1 if x == arg }
     count
   end
-#   my_map
+  #my_map
   def my_map
     output = []
     self.my_each {|x,y| self.class == Array ? output.push(yield(x)) : output.push(yield(x,y))}
+    output
+  end
+  #my_inject
+  def my_inject(num = 0)
+    output = num
+    self.my_each {|x| yield(output,x)}
     output
   end
 end
@@ -77,5 +83,6 @@ b = [5,4,7,9,8,6]
 # puts ary.my_count(2)
 # puts ary.my_count{ |x| x % 2 ==0 }
 
-puts a.my_map {|k,v| "#{v} Dipto and Ryan!"}
+# puts a.my_map {|k,v| "#{v} Dipto and Ryan!"}
 # p b.my_map {|n| n*2}
+p b.my_inject {|sum,n| sum+n }
