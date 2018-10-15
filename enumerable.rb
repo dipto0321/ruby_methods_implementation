@@ -113,10 +113,12 @@ b = [5,4,7,9,8,6]
 product = Proc.new {|n| n * 2}
 sum = Proc.new {|n| n + 2}
 power = Proc.new{|x| x**2}
-
+cool = Proc.new{|k,v| "#{v} is a cool #{k} language"}
  
 test = [1,2,3,4,5,6]
-
+languages = {:frontend => "JavaScript" , :backend => "Ruby"}
 p test.my_map(&product).my_map {|i| i**2}
 p test.my_map(&sum)
 p test.my_map(&power)
+puts "\n\n"
+print languages.my_map(&cool)
