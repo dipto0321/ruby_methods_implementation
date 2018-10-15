@@ -10,19 +10,20 @@ module Enumerable
   def my_select
     output = self.class == Array ? [] : {}
     for i in 0...self.size
-        output.push(self[i]) if self.class == Array && yield(self[i],i)
-        output[self.keys[i]] = self.values[i] if self.class == Hash && yield(self.keys[i],self.values[i])
-      end
-      output
+      output.push(self[i]) if self.class == Array && yield(self[i],i)
+      output[self.keys[i]] = self.values[i] if self.class == Hash && yield(self.keys[i],self.values[i])
+    end
+    output
   end
 
   #my_all?
   def my_all?
     for i in 0...self.size
-        return self.class == Array && !yield(self[i],i) ? false : (self.class == Hash && !yield(self.keys[i],self.values[i]) ? false : true)
+      return false if (self.class == Array && !yield(self[i],i)) || (self.class == Hash && !yield(self.keys[i],self.values[i]))
+      # self.class == Array && !yield(self[i],i) || self.class == Hash && !yield(self.keys[i],self.values[i])
     end
+    true
   end
-  return true
 end
 
 a = {
