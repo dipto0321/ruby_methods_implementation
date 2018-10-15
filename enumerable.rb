@@ -53,12 +53,23 @@ module Enumerable
     self.my_each {|x,y| self.class == Array ? output.push(yield(x)) : output.push(yield(x,y))}
     output
   end
+  
   #my_inject
-  def my_inject(num = 0)
-    output = num
-    self.my_each {|x| yield(output,x)}
-    output
+  def my_inject(arg = nil)
+    arr = self.class == Array ? self.slice(0..-1) : self.class == Range ? self.to_a : self.my_map {|k, v| {k => v} }
+
+    acc = arg == nil ? arr[0] : arg
+    nxt = arg == nil ? arr[1] : arr[0]
+    start = arg == nil ? 1 : 0
+
+    for i in start...arr.size
+      res = yield(acc,nxt,i,arr)
+      acc = res
+      nxt = arr[i+1]
+    end
+    return acc
   end
+
 end
 
 a = {
@@ -85,4 +96,18 @@ b = [5,4,7,9,8,6]
 
 # puts a.my_map {|k,v| "#{v} Dipto and Ryan!"}
 # p b.my_map {|n| n*2}
-p b.my_inject {|sum,n| sum+n }
+# p b.my_inject {|sum,n| sum+n }
+
+# p (5..10).my_inject { |sum, n| sum + n }
+
+longest = %w{ cat sheep bear }.my_inject do |memo, word|
+  memo.length > word.length ? memo : word
+end
+
+# p longest
+
+def multiply_els(arr)
+  return arr.my_inject {|x,y| x*y}
+end
+
+p multiply_els([2,4,5])
