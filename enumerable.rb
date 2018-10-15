@@ -24,6 +24,20 @@ module Enumerable
     end
     true
   end
+  def my_any?
+    for i in 0...self.size
+      return true if (self.class == Array && yield(self[i],i)) || (self.class == Hash && yield(self.keys[i],self.values[i]))
+      # self.class == Array && !yield(self[i],i) || self.class == Hash && !yield(self.keys[i],self.values[i])
+    end
+    false
+  end
+  def my_none?
+    for i in 0...self.size
+      return true if (self.class == Array && !yield(self[i],i)) || (self.class == Hash && !yield(self.keys[i],self.values[i]))
+      # self.class == Array && !yield(self[i],i) || self.class == Hash && !yield(self.keys[i],self.values[i])
+    end
+    false
+  end
 end
 
 a = {
@@ -37,5 +51,9 @@ b = [5,4,7,9,8,6]
 # puts a.my_select {|k,v| k == :apple}
 # p b.my_select {|x| x % 2 == 0}
 
-puts a.my_all? {|k,v| k == :apple}
-puts b.my_all? {|v,i| v > 0}
+# puts a.my_all? {|k,v| k == :apple}
+# puts b.my_all? {|v,i| v > 0}
+# puts a.my_any? {|k,v| k == :apple}
+# puts b.my_any? {|v,i| v > 0}
+puts a.my_none? {|k,v| k == :banana}
+puts b.my_none? {|v,i| v < 0}
