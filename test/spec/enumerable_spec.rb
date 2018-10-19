@@ -62,4 +62,10 @@ RSpec.describe Enumerable do
       expect(fruit.my_map {|key, value| "#{value} Dipto and Ryan!"}).to eql(["hello Dipto and Ryan!", "hi Dipto and Ryan!"])
     end
   end
+
+  describe '#my_none?' do
+    it "return true if there is no key in hash" do
+      expect(fruit.my_none? {|key, value| key == :banana}).to eql(true)
+    end
+  end
 end
