@@ -87,7 +87,7 @@ b = [5,4,7,9,8,6]
 # puts b.my_any? {|v,i| v > 0}
 # puts a.my_none? {|k,v| k == :banana}
 # puts b.my_none? {|v,i| v < 0}
-
+puts a.my_inject {|left, right| left}
 # ary = [1, 2, 4, 2]
 # puts ary.my_count(2)
 # puts ary.my_count{ |x| x % 2 ==0 }
