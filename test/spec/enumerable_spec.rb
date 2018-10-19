@@ -3,6 +3,10 @@ require_relative "../../enumerable"
 RSpec.describe Enumerable do
   numbers = [1, 2, 3, 4, 5]
   disney = {:name => "Mickey", :type => "mouse", "girlfriend" => "Minnie mouse"}
+  fruit = {
+  :apple => "hello",
+  :orange => "hi"
+}
   animals = ["cow","eagle","hyenna"]
   describe "#my_select" do
     it "returns even numbers" do
@@ -29,9 +33,14 @@ RSpec.describe Enumerable do
       expect(numbers.my_inject {|sum, num| sum + num}).to eql(15)
     end
 
-    it "returns the animal with the longest number of characters" do
-      expect(disney.my_inject {|left,right| left.values[0].length > right.values[0].length ? left.values[0] : right.values[0]}).to eql("Minnie mouse")
+    it "returns the fruit with the longest number of characters" do
+      expect(fruit.my_inject {|left , right| left.values[0] > right.values[0] ? left.keys[0] : right.keys[0] }).to eql(:orange)
     end
   end
 
+  describe "#my_count" do
+    it 'return even count' do
+      
+    end
+  end
 end

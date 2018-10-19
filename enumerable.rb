@@ -87,7 +87,6 @@ b = [5,4,7,9,8,6]
 # puts b.my_any? {|v,i| v > 0}
 # puts a.my_none? {|k,v| k == :banana}
 # puts b.my_none? {|v,i| v < 0}
-puts a.my_inject {|left, right| left}
 # ary = [1, 2, 4, 2]
 # puts ary.my_count(2)
 # puts ary.my_count{ |x| x % 2 ==0 }
@@ -122,3 +121,5 @@ puts a.my_inject {|left, right| left}
 # p test.my_map(&power)
 # puts "\n\n"
 # print languages.my_map(&cool)
+
+# p a.my_inject {|left , right| left.values[0] > right.values[0] ? left.keys[0] : right.keys[0] }
