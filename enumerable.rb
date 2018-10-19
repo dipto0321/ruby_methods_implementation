@@ -43,7 +43,7 @@ module Enumerable
   #my_count
   def my_count(arg = nil)
     count = 0
-    return self.size if arg.nil? block_given?
+    return self.size if arg.nil? && !block_given?
     block_given? && arg.nil? ? self.my_each {|el| count += 1 if yield(el)} : self.my_each {|x| count += 1 if x == arg }
     count
   end
@@ -85,7 +85,7 @@ b = [5,4,7,9,8,6]
 # puts b.my_all? {|v,i| v > 0}
 # puts a.my_any? {|k,v| k == :apple}
 # puts b.my_any? {|v,i| v > 0}
-puts a.my_none? {|k,v| k == :banana}
+# puts a.my_none? {|k,v| k == :banana}
 # puts b.my_none? {|v,i| v < 0}
 # ary = [1, 2, 4, 2]
 # puts ary.my_count(2)
