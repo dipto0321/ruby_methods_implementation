@@ -8,6 +8,7 @@ RSpec.describe Enumerable do
   :orange => "hi"
 }
   animals = ["cow","eagle","hyenna"]
+
   describe "#my_select" do
     it "returns even numbers" do
       expect(numbers.my_select { |value| value % 2 == 0}).to eql([2,4])
@@ -39,8 +40,26 @@ RSpec.describe Enumerable do
   end
 
   describe "#my_count" do
-    it 'return even count' do
-      
+    it 'returns even numbers count based on condition in the block' do
+      expect(numbers.my_count {|num| num % 2 == 0}).to eql(2)
+    end
+
+    it "returns the number of matching numbers as in the argument" do
+      expect(numbers.my_count 2).to eql(1)
+    end
+
+    it "returns the length of the array if there were no arguments given" do
+      expect(numbers.my_count).to eql(5)
+    end
+  end
+
+  describe "#my_map" do
+    it "returns an array whose elements are double the input array's elements values " do
+      expect(numbers.my_map {|num| num * 2}).to eql([2, 4, 6, 8, 10])
+    end
+
+    it "can concatenate a string after the values of the hash" do
+      expect(fruit.my_map {|key, value| "#{value} Dipto and Ryan!"}).to eql(["hello Dipto and Ryan!", "hi Dipto and Ryan!"])
     end
   end
 end
