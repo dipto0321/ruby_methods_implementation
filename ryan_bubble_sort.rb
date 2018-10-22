@@ -1,3 +1,5 @@
+# Ryan's bubble sort solution
+
 # Putting a bubble_sort method in Array class
 load "enumerable.rb"
 class Array
